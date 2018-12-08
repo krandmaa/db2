@@ -16,7 +16,7 @@ COMMENT ON VIEW laud_aktiivne_mitteaktiivne IS 'Vaade leiab andmed aktiivsetest 
 CREATE OR REPLACE VIEW laud_koik_seisundid WITH (security_barrier) AS SELECT Laud.laua_kood, Laua_asukoht.nimetus AS asukoha_kirjeldus, Laua_seisundi_liik.nimetus AS laua_seisund
 FROM Laud, Laua_seisundi_liik, Laua_asukoht
 WHERE Laua_seisundi_liik.laua_seisundi_liik_kood=Laud.laua_seisundi_liik_kood AND Laud.laua_asukoht_kood = Laua_asukoht.laua_asukoht_kood AND laua_kood IN (SELECT laua_kood FROM Laua_kategooria_omamine);
-COMMENT ON VIEW laud_koik_seisundid IS 'Vaade leiab andmed mistahes seisundites olevates laudadest. Vaates näidatakse ka laua asukohta, mis annab töötajale ülevaate sellest, kus lauad asuvad.';
+COMMENT ON VIEW laud_koik_seisundid IS 'Vaade leiab andmed mistahes seisundites olevatest laudadest. Vaates näidatakse ka laua asukohta, mis annab töötajale ülevaate sellest, kus lauad asuvad.';
 
 CREATE OR REPLACE VIEW laud_detailid WITH (security_barrier) AS SELECT Laud.laua_kood, Laud.reg_aeg, Laud.kohtade_arv, Laua_asukoht.nimetus AS asukoha_kirjeldus, (Coalesce(Isik.eesnimi,'') || ' ' || Coalesce(Isik.perenimi, '')) AS registreerija, Isik.e_meil, Laua_seisundi_liik.nimetus AS laua_seisund, Laua_materjal.nimetus, Laud.kommentaar AS kommentaar
 FROM Laud, Isik, Laua_seisundi_liik, Laua_materjal, Laua_asukoht
