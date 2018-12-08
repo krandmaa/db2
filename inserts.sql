@@ -53,7 +53,7 @@ INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood
 ('test@gmail.com', '397032198', 'parool', 'EST', 1, '1990-01-01', '2018-04-29 19:42:27', 'Mart', 'Mets', 'Rapla Võsa tn 6');
 
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht) VALUES
-('hello@gmail.com', '397032148', 'password', 'EST', 1, '1990-02-01', '2018-04-30 19:47:31', 'Mihkel         ', '      Hass', 'Rapla');
+('hello@gmail.com', '397032148', 'password', 'EST', 1, '1990-02-01', '2018-04-30 19:47:31', 'Mihkel', 'Hass', 'Rapla');
 
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, elukoht) VALUES
 ('student@example.com', '39948515', 'examplepass', 'EST', 1, '1999-01-01', '2018-05-25 15:43:11', 'Mati', 'Võru Tamme tn 6');
