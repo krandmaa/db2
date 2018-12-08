@@ -9,14 +9,14 @@ SET search_path=public, pg_temp;
 
 
 CREATE OR REPLACE FUNCTION f_registreeri_laud(
-p_laua_kood laud.laua_kood integer,
-p_kohtade_arv laud.kohtade_arv integer,
-p_reg_aeg laud.reg_aeg timestamp,
-p_kommentaar laud.kommentaar text,
-p_laua_asukoht_kood laud.laua_asukoht_kood integer,
-p_laua_materjali_kood laud.laua_materjali_kood integer,
-p_isik_id laud.isik_id integer)
-RETURNS laud.laua_kood integer $$
+p_laua_kood integer,
+p_kohtade_arv integer,
+p_reg_aeg timestamp,
+p_kommentaar text,
+p_laua_asukoht_kood integer,
+p_laua_materjali_kood integer,
+p_isik_id integer)
+RETURNS integer AS $$
 INSERT INTO laud
 (laua_kood, kohtade_arv, reg_aeg, kommentaar, laua_asukoht_kood, laua_materjali_kood, isik_id) VALUES
 (p_laua_kood, p_kohtade_arv, p_reg_aeg, p_kommentaar, p_laua_asukoht_kood, p_laua_materjali_kood, p_isik_id)
