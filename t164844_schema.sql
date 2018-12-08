@@ -118,58 +118,71 @@ DROP SERVER IF EXISTS minu_testandmete_server_apex CASCADE
 DROP EXTENSION IF EXISTS postgres_fdw CASCADE
 ;
 
+/* Drop Domains */
+
+DROP DOMAIN IF EXISTS d_nimetus_100
+;
+
+DROP DOMAIN IF EXISTS d_nimetus_255
+;
+
+/* Create Domains */
+
+CREATE DOMAIN d_nimetus_100 varchar(100) NOT NULL
+CONSTRAINT chk_d_nimetus_100 CHECK (trim(VALUE) <> '')
+;
+
+CREATE DOMAIN d_nimetus_255 varchar(255) NOT NULL
+CONSTRAINT chk_d_nimetus_255 CHECK (trim(VALUE) <> '')
+;
+
 
 /* Create Tables */
 
 CREATE TABLE amet
 (
 amet_kood smallint NOT NULL,
-nimetus varchar(255) NOT NULL,
+nimetus d_nimetus_255,
 kirjeldus text NULL,
 CONSTRAINT PK_amet_kood PRIMARY KEY (amet_kood),
 CONSTRAINT UC_amet_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_amet_kirjeldus CHECK (trim(kirjeldus) <> ''),
-CONSTRAINT chk_amet_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT chk_amet_kirjeldus CHECK (trim(kirjeldus) <> '')
 ) WITH (fillfactor=90)
 ;
 
 CREATE TABLE isiku_seisundi_liik
 (
 isiku_seisundi_liik_kood smallint NOT NULL,
-nimetus varchar(100) NOT NULL,
+nimetus d_nimetus_100,
 CONSTRAINT PK_isiku_seisundi_liik PRIMARY KEY (isiku_seisundi_liik_kood),
-CONSTRAINT UC_isiku_seisundi_liik_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_isiku_seisundi_liik_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT UC_isiku_seisundi_liik_nimetus UNIQUE (nimetus)
 )
 ;
 
 CREATE TABLE kliendi_seisundi_liik
 (
 kliendi_seisundi_liik_kood smallint NOT NULL,
-nimetus varchar(100) NOT NULL,
+nimetus d_nimetus_100,
 CONSTRAINT PK_kliendi_seisundi_liik PRIMARY KEY (kliendi_seisundi_liik_kood),
-CONSTRAINT UC_kliendi_seisundi_liik_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_kliendi_seisundi_liik_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT UC_kliendi_seisundi_liik_nimetus UNIQUE (nimetus)
 )
 ;
 
 CREATE TABLE laua_asukoht
 (
 laua_asukoht_kood smallint NOT NULL,
-nimetus varchar(255) NOT NULL,
+nimetus d_nimetus_255,
 CONSTRAINT PK_laua_asukoht_kood PRIMARY KEY (laua_asukoht_kood),
-CONSTRAINT UC_laua_asukoht_kirjeldus UNIQUE (nimetus),
-CONSTRAINT chk_laua_asukoht_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT UC_laua_asukoht_kirjeldus UNIQUE (nimetus)
 )
 ;
 
 CREATE TABLE laua_kategooria_tyyp
 (
 laua_kategooria_tyyp_kood smallint NOT NULL,
-nimetus varchar(100) NOT NULL,
+nimetus d_nimetus_100,
 CONSTRAINT PK_laua_kategooria_tyyp PRIMARY KEY (laua_kategooria_tyyp_kood),
-CONSTRAINT UC_laua_kategooria_tyyp_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_laua_kategooria_tyyp_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT UC_laua_kategooria_tyyp_nimetus UNIQUE (nimetus)
 )
 ;
 
@@ -177,10 +190,9 @@ CREATE TABLE laua_kategooria
 (
 laua_kategooria_kood smallint NOT NULL,
 laua_kategooria_tyyp_kood smallint NULL,
-nimetus varchar(255) NOT NULL,
+nimetus d_nimetus_255,
 CONSTRAINT PK_laua_kategooria PRIMARY KEY (laua_kategooria_kood),
 CONSTRAINT UC_nimetus_tyyp_kood UNIQUE (nimetus),
-CONSTRAINT chk_laua_kategooria_nimetus CHECK (trim(nimetus) <> ''),
 CONSTRAINT FK_laua_kategooria_laua_kategooria_tyyp FOREIGN KEY (laua_kategooria_tyyp_kood) REFERENCES laua_kategooria_tyyp (laua_kategooria_tyyp_kood) ON DELETE No Action ON UPDATE Cascade
 )
 ;
@@ -198,10 +210,9 @@ CONSTRAINT chk_laua_materjal_nimetus CHECK (trim(nimetus) <> '')
 CREATE TABLE laua_seisundi_liik
 (
 laua_seisundi_liik_kood smallint NOT NULL,
-nimetus varchar(100) NOT NULL,
+nimetus d_nimetus_100,
 CONSTRAINT PK_laua_seisundi_liik PRIMARY KEY (laua_seisundi_liik_kood),
-CONSTRAINT UC_laua_seisundi_liik_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_laua_seisundi_liik_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT UC_laua_seisundi_liik_nimetus UNIQUE (nimetus)
 )
 ;
 
@@ -220,10 +231,9 @@ riik_kood LIKE '___')
 CREATE TABLE tootaja_seisundi_liik
 (
 tootaja_seisundi_liik_kood smallint NOT NULL,
-nimetus varchar(100) NOT NULL,
+nimetus d_nimetus_100,
 CONSTRAINT PK_tootaja_seisundi_liik PRIMARY KEY (tootaja_seisundi_liik_kood),
-CONSTRAINT UC_tootaja_seisundi_liik_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_tootaja_seisundi_liik_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT UC_tootaja_seisundi_liik_nimetus UNIQUE (nimetus)
 )
 ;
 
