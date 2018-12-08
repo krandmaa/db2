@@ -9,53 +9,6 @@
 DROP SEQUENCE IF EXISTS isik_isik_id_seq
 ;
 
-/* Drop Tables case-sensitive*/
-
-DROP TABLE IF EXISTS "Amet" CASCADE
-;
-
-DROP TABLE IF EXISTS "Isiku_seisundi_liik" CASCADE
-;
-
-DROP TABLE IF EXISTS "Kliendi_seisundi_liik" CASCADE
-;
-
-DROP TABLE IF EXISTS "Laua_asukoht" CASCADE
-;
-
-DROP TABLE IF EXISTS "Laua_kategooria_tyyp" CASCADE
-;
-
-DROP TABLE IF EXISTS "Laua_kategooria" CASCADE
-;
-
-DROP TABLE IF EXISTS "Laua_materjal" CASCADE
-;
-
-DROP TABLE IF EXISTS "Laua_seisundi_liik" CASCADE
-;
-
-DROP TABLE IF EXISTS "Riik" CASCADE
-;
-
-DROP TABLE IF EXISTS "Tootaja_seisundi_liik" CASCADE
-;
-
-DROP TABLE IF EXISTS "Isik" CASCADE
-;
-
-DROP TABLE IF EXISTS "Klient" CASCADE
-;
-
-DROP TABLE IF EXISTS "Tootaja" CASCADE
-;
-
-DROP TABLE IF EXISTS "Laud" CASCADE
-;
-
-DROP TABLE IF EXISTS "Laua_kategooria_omamine" CASCADE
-;
-
 /* Drop Tables */
 
 DROP TABLE IF EXISTS amet CASCADE
