@@ -206,7 +206,7 @@ synni_kp date NOT NULL,
 CONSTRAINT PK_isik PRIMARY KEY (isik_id),
 CONSTRAINT UC_riik_isikukood UNIQUE (riik_kood,isikukood),
 CONSTRAINT UC_e_meil UNIQUE (e_meil),
-CONSTRAINT chk_isik_eesnimi_perenimi CHECK ((trim(eesnimi) <> '' OR trim(perenimi) <> '') AND (REPLACE(eesnimi, ' ', '') ~ '^[0-9\.]+$' OR REPLACE(perenimi, ' ', '') ~ '^[0-9\.]+$')),
+CONSTRAINT chk_isik_eesnimi_perenimi CHECK (trim(eesnimi) <> '' OR trim(perenimi) <> ''),
 CONSTRAINT chk_isik_synni_kp CHECK (synni_kp <= reg_aeg AND
 synni_kp BETWEEN '1900-01-01' AND '2100-12-31'),
 CONSTRAINT chk_isik_e_meil CHECK (e_meil LIKE '%@%' AND 
