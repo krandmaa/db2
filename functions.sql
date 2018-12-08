@@ -11,7 +11,7 @@ SET search_path=public, pg_temp;
 CREATE OR REPLACE FUNCTION f_registreeri_laud(
 p_laua_kood integer,
 p_kohtade_arv integer,
-p_reg_aeg timestamp,
+p_reg_aeg timestamp without timezone,
 p_kommentaar text,
 p_laua_asukoht_kood integer,
 p_laua_materjali_kood integer,
