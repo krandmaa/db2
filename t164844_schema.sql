@@ -62,7 +62,7 @@ DROP FOREIGN TABLE IF EXISTS riik_jsonb CASCADE
 DROP FOREIGN TABLE IF EXISTS isik_jsonb CASCADE
 ;
 
-DROP USER MAPPING FOR t164844 SERVER minu_testandmete_server_apex
+DROP USER MAPPING IF EXISTS FOR t164844 SERVER minu_testandmete_server_apex
 ;
 
 DROP SERVER IF EXISTS minu_testandmete_server_apex CASCADE
