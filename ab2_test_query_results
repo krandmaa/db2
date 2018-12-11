@@ -1,0 +1,48 @@
+Märkmed:
+
+märkused puudu
+f_muuda_laua_andmeid -> f_muuda_laud
+
+laud: 
+	isik_id liiga üldine nimi
+	nimetus -> laud_nimetus
+
+kitsenduste nimetustes +tabeli nimetus
+
+reg_aeg ja synni_kp check eraldi
+
+laud ja isik tabelis reg aeg kitsendused millegi pärast erinevad
+
+
+eesnimi + perenimi varchar(1000)
+kommentaar -> text
+
+synni_kp kitsendus 1900-2100
+
+andmetüüpide mittekooskõla
+
+klassifikaatorite nimetuste pikkused erinevad
+
+laud tabelis reg_aeg peab olema kellaaeg + kuupäev
+
+laua tebalis välisvõti, mis viitab isik tabelile (on update cascade) (isik_id on masina poolt genereeritud, tuleb ära võtta on update cascade)
+
+indekseerimata välisvõtmed
+
+kattuvad indeksid
+
+laua_kategooria tabelis ei tohi olla mittekohustuslikke veerge
+
+isikukood -> muuta nii, et võib sisaldada tühikuid, a-zA-Z -> ~*
+
+tabelite nimetamise järjekindlus
+
+laua_materjal ja laud tabelites materjal nimetus erinev
+
+riigi koodi check -> kolm suurt tähte
+
+isik.reg_aeg check viimane päev jääb välja
+
+laua_kategooria_tüüp -> kood on mittekohustuslik, peab olema kohustuslik
+
+Select laud.laua_kood ... mingi mõttetu JOIN clause, mida pole vaja
