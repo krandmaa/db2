@@ -38,7 +38,7 @@ CREATE OR REPLACE FUNCTION f_muuda_laud(
 p_laua_kood_vana laud.laua_kood % TYPE,
 p_laua_kood_uus laud.laua_kood % TYPE,
 p_kohtade_arv laud.kohtade_arv % TYPE,
-p_kommentaar % TYPE,
+p_kommentaar laud.kommentaar % TYPE,
 p_laua_materjali_kood laud.laua_materjali_kood % TYPE,
 p_laua_asukoht_kood laud.laua_asukoht_kood % TYPE
 )
