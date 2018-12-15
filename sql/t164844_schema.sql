@@ -142,7 +142,7 @@ CONSTRAINT UC_laua_kategooria_tyyp_nimetus UNIQUE (nimetus)
 CREATE TABLE laua_kategooria
 (
 laua_kategooria_kood smallint NOT NULL,
-laua_kategooria_tyyp_kood smallint NULL,
+laua_kategooria_tyyp_kood smallint NOT NULL,
 nimetus d_nimetus_255,
 CONSTRAINT PK_laua_kategooria PRIMARY KEY (laua_kategooria_kood),
 CONSTRAINT UC_nimetus_tyyp_kood UNIQUE (nimetus),
@@ -214,7 +214,7 @@ e_meil NOT LIKE '%@%@%'),
 CONSTRAINT chk_isik_isikukood CHECK (trim(isikukood) <> '' AND
 isikukood ~ '^[a-zA-Z0-9\/-]+$'),
 CONSTRAINT chk_isik_parool CHECK (trim(parool) <> ''),
-CONSTRAINT chk_isik_reg_aeg CHECK (reg_aeg BETWEEN '2010-01-01' AND '2100-12-31'),
+CONSTRAINT chk_isik_reg_aeg CHECK (reg_aeg >= '2010-01-01 00:00:00'::timestamp without time zone AND reg_aeg <= '2100-12-31 23:59:59'::timestamp without time zone),
 CONSTRAINT chk_isik_elukoht CHECK (trim(elukoht) <> '' AND
 NOT(REPLACE(elukoht, ' ', '') ~ '^[0-9\.]+$')),
 CONSTRAINT FK_isik_isiku_seisundi_liik FOREIGN KEY (isiku_seisundi_liik_kood) REFERENCES isiku_seisundi_liik (isiku_seisundi_liik_kood) ON DELETE No Action ON UPDATE Cascade,
