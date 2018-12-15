@@ -213,7 +213,8 @@ e_meil NOT LIKE '%@%@%'),
 CONSTRAINT chk_isik_isikukood CHECK (trim(isikukood) <> '' AND
 isikukood ~ '^[a-zA-Z0-9\/-]+$'),
 CONSTRAINT chk_isik_parool CHECK (trim(parool) <> ''),
-CONSTRAINT chk_isik_reg_aeg CHECK (reg_aeg >= '2010-01-01 00:00:00'::timestamp without time zone AND reg_aeg <= '2100-12-31 23:59:59'::timestamp without time zone),
+CONSTRAINT chk_isik_synni_kp_reg_aeg CHECK (synni_kp <= reg_aeg),
+CONSTRAINT chk_isik_synni_kp_vaartus CHECK (synni_kp >= '1900-01-01 00:00:00'::timestamp without time zone AND synni_kp <= '2100-12-31 23:59:59'::timestamp without time zone),
 CONSTRAINT chk_isik_elukoht CHECK (trim(elukoht) <> '' AND
 NOT(REPLACE(elukoht, ' ', '') ~ '^[0-9\.]+$')),
 CONSTRAINT FK_isik_isiku_seisundi_liik FOREIGN KEY (isiku_seisundi_liik_kood) REFERENCES isiku_seisundi_liik (isiku_seisundi_liik_kood) ON DELETE No Action ON UPDATE Cascade,
