@@ -44,10 +44,10 @@ INSERT INTO tootaja_seisundi_liik (tootaja_seisundi_liik_kood, nimetus) VALUES (
 INSERT INTO tootaja_seisundi_liik (tootaja_seisundi_liik_kood, nimetus) VALUES (6, 'Töösuhe lõpetatud');
 INSERT INTO tootaja_seisundi_liik (tootaja_seisundi_liik_kood, nimetus) VALUES (7, 'Vallandatud');
 
-INSERT INTO laua_materjal (materjali_kood, nimetus) VALUES (1, 'Puit');
-INSERT INTO laua_materjal (materjali_kood, nimetus) VALUES (2, 'Klaas');
-INSERT INTO laua_materjal (materjali_kood, nimetus) VALUES (3, 'Raud');
-INSERT INTO laua_materjal (materjali_kood, nimetus) VALUES (4, 'Paber');
+INSERT INTO laua_materjal (laua_materjali_kood, nimetus) VALUES (1, 'Puit');
+INSERT INTO laua_materjal (laua_materjali_kood, nimetus) VALUES (2, 'Klaas');
+INSERT INTO laua_materjal (laua_materjali_kood, nimetus) VALUES (3, 'Raud');
+INSERT INTO laua_materjal (laua_materjali_kood, nimetus) VALUES (4, 'Paber');
 
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht) VALUES
 ('test@gmail.com', '397032198', 'parool', 'EST', 1, '1990-01-01', '2018-04-29 19:42:27', 'Mart', 'Mets', 'Rapla Võsa tn 6');
