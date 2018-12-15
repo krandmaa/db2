@@ -305,3 +305,12 @@ CREATE INDEX ixfk_laud_laua_seisundi_liik_kood ON laud (laua_seisundi_liik_kood 
 
 CREATE INDEX ixfk_laud_isik_id ON laud (isik_id ASC)
 ;
+
+CREATE INDEX ixfk_laua_kategooria_omamine_laua_kategooria_kood ON laua_kategooria_omamine (laua_kategooria_kood ASC)
+;
+
+CREATE INDEX ixfk_laud_laua_materjali_kood ON laud_laua_materjal (laua_materjali_kood ASC)
+;
+
+CREATE INDEX ixfk_tootaja_amet_kood ON amet_kood (amet_kood ASC)
+;
