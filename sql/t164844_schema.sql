@@ -208,7 +208,7 @@ CONSTRAINT chk_isik_eesnimi_perenimi CHECK (trim(eesnimi) <> '' OR trim(perenimi
 CONSTRAINT chk_isik_e_meil CHECK (e_meil LIKE '%@%' AND 
 e_meil NOT LIKE '%@%@%'),
 CONSTRAINT chk_isik_isikukood CHECK (trim(isikukood) <> '' AND
-isikukood ~ '^[a-zA-Z0-9\/-]+$'),
+isikukood ~* '^[a-z0-9 -]+$'),
 CONSTRAINT chk_isik_parool CHECK (trim(parool) <> ''),
 CONSTRAINT chk_isik_synni_kp_reg_aeg CHECK (synni_kp <= reg_aeg),
 CONSTRAINT chk_isik_synni_kp CHECK (synni_kp >= '1900-01-01 00:00:00'::timestamp without time zone AND synni_kp <= '2100-12-31 23:59:59'::timestamp without time zone),
