@@ -176,8 +176,7 @@ nimetus varchar(100) NOT NULL,
 CONSTRAINT PK_riik PRIMARY KEY (riik_kood),
 CONSTRAINT UC_riik_nimetus UNIQUE (nimetus),
 CONSTRAINT chk_riik_nimetus CHECK (trim(nimetus) <> ''),
-CONSTRAINT chk_riik_riik_kood CHECK (trim(riik_kood) <> '' AND
-riik_kood LIKE '___')
+CONSTRAINT chk_riik_riik_kood CHECK (trim(riik_kood) <> '' AND (riik_kood ~ '^[A-Z]{3}$'))
 )
 ;
 
