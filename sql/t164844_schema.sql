@@ -145,7 +145,7 @@ laua_kategooria_tyyp_kood SMALLINT NOT NULL,
 nimetus d_nimetus,
 CONSTRAINT pk_laua_kategooria_laua_kategooria_kood PRIMARY KEY (laua_kategooria_kood),
 CONSTRAINT uc_laua_kategooria_nimetus UNIQUE (nimetus),
-CONSTRAINT fk_laua_kategooria_laua_kategooria_tyyp_kood FOREIGN KEY (laua_kategooria_tyyp_kood) REFERENCES laua_kategooria_tyyp (laua_kategooria_tyyp_kood) ON DELETE NO Action ON UPDATE Cascade
+CONSTRAINT fk_laua_kategooria_laua_kategooria_tyyp_kood FOREIGN KEY (laua_kategooria_tyyp_kood) REFERENCES laua_kategooria_tyyp (laua_kategooria_tyyp_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 )
 ;
 
@@ -214,8 +214,8 @@ CONSTRAINT chk_isik_synni_kp_reg_aeg CHECK (synni_kp <= reg_aeg),
 CONSTRAINT chk_isik_synni_kp CHECK (synni_kp >= '1900-01-01 00:00:00'::timestamp without time zone AND synni_kp <= '2100-12-31 23:59:59'::timestamp without time zone),
 CONSTRAINT chk_isik_elukoht CHECK (trim(elukoht) <> '' AND
 NOT(REPLACE(elukoht, ' ', '') ~ '^[0-9\.]+$')),
-CONSTRAINT fk_isik_isiku_seisundi_liik_kood FOREIGN KEY (isiku_seisundi_liik_kood) REFERENCES isiku_seisundi_liik (isiku_seisundi_liik_kood) ON DELETE NO Action ON UPDATE Cascade,
-CONSTRAINT fk_isik_riik_kood FOREIGN KEY (riik_kood) REFERENCES Riik (riik_kood) ON DELETE NO Action ON UPDATE Cascade
+CONSTRAINT fk_isik_isiku_seisundi_liik_kood FOREIGN KEY (isiku_seisundi_liik_kood) REFERENCES isiku_seisundi_liik (isiku_seisundi_liik_kood) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fk_isik_riik_kood FOREIGN KEY (riik_kood) REFERENCES Riik (riik_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 ) WITH (fillfactor=90)
 ;
 
@@ -225,8 +225,8 @@ isik_id INTEGER NOT NULL,
 kliendi_seisundi_liik_kood SMALLINT NOT NULL DEFAULT 1,
 on_nous_tylitamisega boolean NOT NULL DEFAULT false,
 CONSTRAINT pk_klient_isik_id PRIMARY KEY (isik_id),
-CONSTRAINT fk_klient_isik_id FOREIGN KEY (isik_id) REFERENCES isik (isik_id) ON DELETE Cascade ON UPDATE NO Action,
-CONSTRAINT fk_klient_kliendi_seisundi_liik_kood FOREIGN KEY (kliendi_seisundi_liik_kood) REFERENCES kliendi_seisundi_liik (kliendi_seisundi_liik_kood) ON DELETE NO Action ON UPDATE Cascade
+CONSTRAINT fk_klient_isik_id FOREIGN KEY (isik_id) REFERENCES isik (isik_id) ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT fk_klient_kliendi_seisundi_liik_kood FOREIGN KEY (kliendi_seisundi_liik_kood) REFERENCES kliendi_seisundi_liik (kliendi_seisundi_liik_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 ) WITH (fillfactor=90)
 ;
 
@@ -238,9 +238,9 @@ tootaja_seisundi_liik_kood SMALLINT NOT NULL DEFAULT 1,
 mentor INTEGER NULL,
 CONSTRAINT pk_tootaja_isik_id PRIMARY KEY (isik_id),
 CONSTRAINT chk_tootaja_mentor CHECK (mentor <> isik_id),
-CONSTRAINT fk_tootaja_isik_id FOREIGN KEY (isik_id) REFERENCES isik (isik_id) ON DELETE Cascade ON UPDATE NO Action,
-CONSTRAINT fk_tootaja_amet_kood FOREIGN KEY (amet_kood) REFERENCES amet (amet_kood) ON DELETE NO Action ON UPDATE Cascade,
-CONSTRAINT fk_tootaja_tootaja_seisundi_liik_kood FOREIGN KEY (tootaja_seisundi_liik_kood) REFERENCES tootaja_seisundi_liik (tootaja_seisundi_liik_kood) ON DELETE NO Action ON UPDATE Cascade
+CONSTRAINT fk_tootaja_isik_id FOREIGN KEY (isik_id) REFERENCES isik (isik_id) ON DELETE CASCADE ON UPDATE NO ACTION,
+CONSTRAINT fk_tootaja_amet_kood FOREIGN KEY (amet_kood) REFERENCES amet (amet_kood) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fk_tootaja_tootaja_seisundi_liik_kood FOREIGN KEY (tootaja_seisundi_liik_kood) REFERENCES tootaja_seisundi_liik (tootaja_seisundi_liik_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 ) WITH (fillfactor=90)
 ;
 
@@ -258,10 +258,10 @@ kommentaar TEXT	NULL,
 CONSTRAINT pk_laud_laua_kood PRIMARY KEY (laua_kood),
 CONSTRAINT chk_kommentaar CHECK (char_length(kommentaar) <= 4000),
 CONSTRAINT chk_laud_kohtade_arv CHECK (kohtade_arv > 0 AND kohtade_arv < 17),
-CONSTRAINT fk_laud_laua_asukoht_kood FOREIGN KEY (laua_asukoht_kood) REFERENCES laua_asukoht (laua_asukoht_kood) ON DELETE NO Action ON UPDATE Cascade,
-CONSTRAINT fk_laud_laua_materjali_kood FOREIGN KEY (laua_materjali_kood) REFERENCES laua_materjal (laua_materjali_kood) ON DELETE NO Action ON UPDATE Cascade,
-CONSTRAINT fk_laud_isik_id FOREIGN KEY (isik_id) REFERENCES tootaja (isik_id) ON DELETE NO Action ON UPDATE Cascade,
-CONSTRAINT fk_laud_laua_seisundi_liik_kood FOREIGN KEY (laua_seisundi_liik_kood) REFERENCES laua_seisundi_liik (laua_seisundi_liik_kood) ON DELETE NO Action ON UPDATE Cascade
+CONSTRAINT fk_laud_laua_asukoht_kood FOREIGN KEY (laua_asukoht_kood) REFERENCES laua_asukoht (laua_asukoht_kood) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fk_laud_laua_materjali_kood FOREIGN KEY (laua_materjali_kood) REFERENCES laua_materjal (laua_materjali_kood) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT fk_laud_isik_id FOREIGN KEY (isik_id) REFERENCES tootaja (isik_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT fk_laud_laua_seisundi_liik_kood FOREIGN KEY (laua_seisundi_liik_kood) REFERENCES laua_seisundi_liik (laua_seisundi_liik_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 ) WITH (fillfactor=90)
 ;
 
@@ -270,8 +270,8 @@ CREATE TABLE laua_kategooria_omamine
 laua_kood SMALLINT NOT NULL,
 laua_kategooria_kood SMALLINT NOT NULL,
 CONSTRAINT pk_laua_kategooria_omamine_laua_kood_laua_kategooria_kood PRIMARY KEY (laua_kood,laua_kategooria_kood),
-CONSTRAINT fk_laua_kategooria_omamine_laua_kood FOREIGN KEY (laua_kood) REFERENCES laud (laua_kood) ON DELETE Cascade ON UPDATE Cascade,
-CONSTRAINT fk_laua_kategooria_omamine_laua_kategooria_kood FOREIGN KEY (laua_kategooria_kood) REFERENCES laua_kategooria (laua_kategooria_kood) ON DELETE NO Action ON UPDATE Cascade
+CONSTRAINT fk_laua_kategooria_omamine_laua_kood FOREIGN KEY (laua_kood) REFERENCES laud (laua_kood) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_laua_kategooria_omamine_laua_kategooria_kood FOREIGN KEY (laua_kategooria_kood) REFERENCES laua_kategooria (laua_kategooria_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 )
 ;
 
