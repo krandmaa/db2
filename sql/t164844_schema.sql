@@ -152,7 +152,7 @@ CONSTRAINT FK_laua_kategooria_laua_kategooria_tyyp FOREIGN KEY (laua_kategooria_
 
 CREATE TABLE laua_materjal
 (
-materjali_kood smallint NOT NULL,
+laua_materjali_kood smallint NOT NULL,
 nimetus varchar(50) NOT NULL,
 CONSTRAINT PK_laua_materjali_kood PRIMARY KEY (materjali_kood),
 CONSTRAINT UC_laua_materjal UNIQUE (nimetus),
