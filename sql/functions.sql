@@ -49,7 +49,7 @@ UPDATE laud SET laua_kood = p_laua_kood_uus, kohtade_arv = p_kohtade_arv, kommen
 WHERE laua_kood = p_laua_kood_vana
 $$ LANGUAGE SQL SECURITY DEFINER
 SET search_path = public, pg_temp;
-COMMENT ON FUNCTION f_muuda_laud IS 'Funktsioon muudab laua andmeid.';
+COMMENT ON FUNCTION f_muuda_laud IS 'Funktsiooniga saab uuendab laua koodi, kohtade arvu, kommentaari, matejali koodi ja laua asukohta.';
 
 
 CREATE OR REPLACE FUNCTION f_muuda_laud_aktiivseks(p_laua_kood laud.laua_kood % TYPE)
@@ -59,7 +59,7 @@ WHERE laua_kood = p_laua_kood AND
 (laua_seisundi_liik_kood = 1 OR laua_seisundi_liik_kood = 3);
 $$ LANGUAGE SQL SECURITY DEFINER
 SET search_path = public, pg_temp;
-COMMENT ON FUNCTION f_muuda_laud_aktiivseks IS 'Funktsioon muudab mitteaktiivse või ootel laua aktiivseks.';
+COMMENT ON FUNCTION f_muuda_laud_aktiivseks IS 'Funktsioon muudab laua mitteaktiivsest või ootel olekust aktiivsesse olekusse.';
 
 CREATE OR REPLACE FUNCTION f_muuda_laud_mitteaktiivseks(p_laua_kood laud.laua_kood % TYPE)
 RETURNS VOID AS $$
@@ -68,4 +68,4 @@ WHERE laua_kood = p_laua_kood AND
 laua_seisundi_liik_kood = 2;
 $$ LANGUAGE SQL SECURITY DEFINER
 SET search_path = public, pg_temp;
-COMMENT ON FUNCTION f_muuda_laud_mitteaktiivseks IS 'Funktsioon muudab aktiivse laua mitteaktiivseks.';
+COMMENT ON FUNCTION f_muuda_laud_mitteaktiivseks IS 'Funktsioon muudab laua aktiivsest olekust mitteaktiivsesse olekusse.';
