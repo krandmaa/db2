@@ -202,7 +202,7 @@ elukoht VARCHAR(255) NULL,
 CONSTRAINT pk_isik_isik_id PRIMARY KEY (isik_id),
 CONSTRAINT uc_isik_riik_kood_isikukood UNIQUE (riik_kood,isikukood),
 CONSTRAINT uc_isik_e_meil UNIQUE (e_meil),
-CONSTRAINT chk_isik_eesnimi_perenimi CHECK (trim(eesnimi) <> '' OR trim(perenimi) <> ''),
+CONSTRAINT chk_isik_eesnimi_perenimi CHECK ((trim(eesnimi) <> '' AND eesnimi IS NOT NULL) OR (trim(perenimi) <> '' AND perenimi IS NOT NULL)),
 CONSTRAINT chk_isik_e_meil CHECK (e_meil LIKE '%@%' AND 
 e_meil NOT LIKE '%@%@%'),
 CONSTRAINT chk_isik_isikukood CHECK (trim(isikukood) <> '' AND
