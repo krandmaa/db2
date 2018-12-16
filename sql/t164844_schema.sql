@@ -257,7 +257,7 @@ CONSTRAINT chk_laud_kommentaar CHECK (char_length(kommentaar) <= 4000),
 CONSTRAINT chk_laud_kohtade_arv CHECK (kohtade_arv > 0 AND kohtade_arv < 17),
 CONSTRAINT fk_laud_laua_asukoht_kood FOREIGN KEY (laua_asukoht_kood) REFERENCES laua_asukoht (laua_asukoht_kood) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT fk_laud_laua_materjali_kood FOREIGN KEY (laua_materjali_kood) REFERENCES laua_materjal (laua_materjali_kood) ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT fk_laud_isik_id FOREIGN KEY (registreerija_id) REFERENCES tootaja (isik_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT fk_laud_registreerija_id FOREIGN KEY (registreerija_id) REFERENCES tootaja (isik_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT fk_laud_laua_seisundi_liik_kood FOREIGN KEY (laua_seisundi_liik_kood) REFERENCES laua_seisundi_liik (laua_seisundi_liik_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 ) WITH (fillfactor=90)
 ;
@@ -297,7 +297,7 @@ CREATE INDEX ixfk_laud_laua_asukoht_kood ON laud (laua_asukoht_kood ASC)
 CREATE INDEX ixfk_laud_laua_seisundi_liik_kood ON laud (laua_seisundi_liik_kood ASC)
 ;
 
-CREATE INDEX ixfk_laud_isik_id ON laud (isik_id ASC)
+CREATE INDEX ixfk_laud_registreerija_id ON laud (registreerija_id ASC)
 ;
 
 CREATE INDEX ixfk_laua_kategooria_omamine_laua_kategooria_kood ON laua_kategooria_omamine (laua_kategooria_kood ASC)
