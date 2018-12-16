@@ -97,8 +97,7 @@ amet_kood SMALLINT NOT NULL,
 nimetus d_nimetus,
 kirjeldus TEXT NULL,
 CONSTRAINT pk_amet_amet_kood PRIMARY KEY (amet_kood),
-CONSTRAINT uc_amet_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_amet_kirjeldus CHECK (trim(kirjeldus) <> '')
+CONSTRAINT uc_amet_nimetus UNIQUE (nimetus)
 ) WITH (fillfactor=90)
 ;
 
@@ -154,8 +153,7 @@ CREATE TABLE laua_materjal
 laua_materjali_kood SMALLINT NOT NULL,
 nimetus d_nimetus NOT NULL,
 CONSTRAINT pk_laua_materjal_laua_materjali_kood PRIMARY KEY (laua_materjali_kood),
-CONSTRAINT uc_laua_materjal_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_laua_materjal_nimetus CHECK (trim(nimetus) <> '')
+CONSTRAINT uc_laua_materjal_nimetus UNIQUE (nimetus)
 )
 ;
 
@@ -174,7 +172,6 @@ riik_kood VARCHAR(3) NOT NULL,
 nimetus d_nimetus NOT NULL,
 CONSTRAINT pk_riik_riik_kood PRIMARY KEY (riik_kood),
 CONSTRAINT uc_riik_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_riik_nimetus CHECK (trim(nimetus) <> ''),
 CONSTRAINT chk_riik_riik_kood CHECK (trim(riik_kood) <> '' AND (riik_kood ~ '^[A-Z]{3}$'))
 )
 ;
