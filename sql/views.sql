@@ -19,12 +19,12 @@ FROM laud l, laua_seisundi_liik lsl, laua_asukoht la
 WHERE lsl.laua_seisundi_liik_kood = l.laua_seisundi_liik_kood AND l.laua_asukoht_kood = la.laua_asukoht_kood;
 COMMENT ON VIEW laud_koik_seisundid IS 'Vaade leiab andmed mistahes seisundites olevatest laudadest. Vaates näidatakse ka laua asukohta, mis annab töötajale ülevaate sellest, kus lauad asuvad.';
 
-CREATE OR REPLACE VIEW laud_detailid WITH (security_barrier) AS SELECT l.laua_kood, l.reg_aeg, l.kohtade_arv, la.nimetus AS asukoha_kirjeldus, (Coalesce(i.eesnimi,'') || ' ' || Coalesce(i.perenimi, '')) AS registreerija, i.e_meil, lsl.nimetus AS laua_seisund, lm.nimetus, l.kommentaar AS kommentaar
+CREATE OR REPLACE VIEW laud_detailid WITH (security_barrier) AS SELECT l.laua_kood, l.reg_aeg, l.kohtade_arv, la.nimetus AS asukoha_kirjeldus, (COALESCE(i.eesnimi,'') || ' ' || COALESCE(i.perenimi, '')) AS registreerija, i.e_meil, lsl.nimetus AS laua_seisund, lm.nimetus, l.kommentaar AS kommentaar
 FROM laud l, isik i, laua_seisundi_liik lsl, laua_materjal lm, laua_asukoht la
-WHERE (l.isik_id = i.isik_id) AND lsl.laua_seisundi_liik_kood = l.laua_seisundi_liik_kood AND l.laua_materjali_kood = lm.materjali_kood AND l.laua_asukoht_kood = la.laua_asukoht_kood;
+WHERE (l.registreerija_id = i.isik_id) AND lsl.laua_seisundi_liik_kood = l.laua_seisundi_liik_kood AND l.laua_materjali_kood = lm.laua_materjali_kood AND l.laua_asukoht_kood = la.laua_asukoht_kood;
 COMMENT ON VIEW laud_detailid IS 'Vaade leiab andmed kõikide laudade ja nende detailide kohta. Detailides sisaldub registreerimise aeg, registreerija, registreerija e-mail, laua asukoht, kohtade arv, laua seisund, kommentaar, laua materjal ning laua kategooria(d).';
 
-CREATE OR REPLACE VIEW laud_kategooria WITH (security_barrier) AS SELECT l.laua_kood, lk.nimetus || ' (' || lkt.nimetus || ')' AS kategooria
+CREATE OR REPLACE VIEW laud_kategooria WITH (security_barrier) AS SELECT l.laua_kood, (COALESCE(lk.nimetus,'') || ' (' || COALESCE(lkt.nimetus,'') || ')') AS kategooria
 FROM laud l, laua_kategooria lk, laua_kategooria_omamine lko, laua_kategooria_tyyp lkt
 WHERE l.laua_kood = lko.laua_kood
 AND lk.laua_kategooria_kood = lko.laua_kategooria_kood
