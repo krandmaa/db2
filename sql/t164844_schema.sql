@@ -81,7 +81,7 @@ DROP DOMAIN IF EXISTS d_reg_aeg
 
 /* Create Domains */
 
-CREATE DOMAIN d_nimetus VARCHAR(255) NOT NULL
+CREATE DOMAIN d_nimetus VARCHAR(255)
 CONSTRAINT chk_d_nimetus CHECK (trim(VALUE) <> '')
 ;
 
@@ -283,9 +283,6 @@ CREATE INDEX ixfk_laua_kategooria_laua_kategooria_tyyp_kood ON laua_kategooria (
 ;
 
 CREATE INDEX ixfk_isik_isiku_seisundi_liik_kood ON isik (isiku_seisundi_liik_kood ASC)
-;
-
-CREATE INDEX ixfk_isik_riik_kood ON isik (riik_kood ASC)
 ;
 
 CREATE INDEX ixfk_klient_kliendi_seisundi_liik_kood ON klient (kliendi_seisundi_liik_kood ASC)
