@@ -78,13 +78,13 @@ INSERT INTO klient (isik_id, kliendi_seisundi_liik_kood, on_nous_tylitamisega) V
 INSERT INTO tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood) VALUES (8,3,1);
 INSERT INTO tootaja (isik_id, amet_kood, tootaja_seisundi_liik_kood, mentor) VALUES (13,2,1,8);
 
-INSERT INTO laud (laua_kood, reg_aeg, kohtade_arv, laua_asukoht_kood, laua_seisundi_liik_kood, isik_id, laua_materjali_kood, kommentaar, laua_kategooria_tyyp_kood) VALUES
+INSERT INTO laud (laua_kood, reg_aeg, kohtade_arv, laua_asukoht_kood, laua_seisundi_liik_kood, registreerija_id, laua_materjali_kood, kommentaar, laua_kategooria_tyyp_kood) VALUES
 (2, '2018-04-27 14:32:23', 1, 1, 2, 8, 3, 'uus laud', 1);
 
-INSERT INTO laud (laua_kood, reg_aeg, kohtade_arv, laua_asukoht_kood, laua_seisundi_liik_kood, isik_id, laua_materjali_kood, kommentaar, laua_kategooria_tyyp_kood) VALUES
+INSERT INTO laud (laua_kood, reg_aeg, kohtade_arv, laua_asukoht_kood, laua_seisundi_liik_kood, registreerija_id, laua_materjali_kood, kommentaar, laua_kategooria_tyyp_kood) VALUES
 (3, '2018-05-27 13:23:22', 16, 2, 2, 8, 2, 'Vajab tõhusamat puhastust', 2);
 
-INSERT INTO laud (laua_kood, reg_aeg, kohtade_arv, laua_asukoht_kood, laua_seisundi_liik_kood, isik_id, laua_materjali_kood, kommentaar, laua_kategooria_tyyp_kood) VALUES
+INSERT INTO laud (laua_kood, reg_aeg, kohtade_arv, laua_asukoht_kood, laua_seisundi_liik_kood, registreerija_id, laua_materjali_kood, kommentaar, laua_kategooria_tyyp_kood) VALUES
 (45, '2018-05-12 19:46:01', 6, 3, 3, 8, 1, '', 2);
 
 INSERT INTO laua_kategooria_omamine (laua_kood, laua_kategooria_kood) VALUES (2,2);
