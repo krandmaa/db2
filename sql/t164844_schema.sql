@@ -81,7 +81,7 @@ DROP DOMAIN IF EXISTS d_reg_aeg
 
 /* Create Domains */
 
-CREATE DOMAIN d_nimetus VARCHAR(255)
+CREATE DOMAIN d_nimetus VARCHAR(255) NOT NULL
 CONSTRAINT chk_d_nimetus CHECK (trim(VALUE) <> '')
 ;
 
@@ -152,7 +152,7 @@ CONSTRAINT fk_laua_kategooria_laua_kategooria_tyyp_kood FOREIGN KEY (laua_katego
 CREATE TABLE laua_materjal
 (
 laua_materjali_kood SMALLINT NOT NULL,
-nimetus d_nimetus NOT NULL,
+nimetus d_nimetus,
 CONSTRAINT pk_laua_materjal_laua_materjali_kood PRIMARY KEY (laua_materjali_kood),
 CONSTRAINT uc_laua_materjal_nimetus UNIQUE (nimetus)
 )
@@ -170,7 +170,7 @@ CONSTRAINT uc_laua_seisundi_liik_nimetus UNIQUE (nimetus)
 CREATE TABLE riik
 (
 riik_kood VARCHAR(3) NOT NULL,
-nimetus d_nimetus NOT NULL,
+nimetus d_nimetus,
 CONSTRAINT pk_riik_riik_kood PRIMARY KEY (riik_kood),
 CONSTRAINT uc_riik_nimetus UNIQUE (nimetus),
 CONSTRAINT chk_riik_riik_kood CHECK (trim(riik_kood) <> '' AND (riik_kood ~ '^[A-Z]{3}$'))
@@ -198,7 +198,7 @@ reg_aeg d_reg_aeg,
 synni_kp date NOT NULL,
 eesnimi VARCHAR(1000) NULL,
 perenimi VARCHAR(1000) NULL,
-elukoht d_nimetus NULL,
+elukoht VARCHAR(255) NULL,
 CONSTRAINT pk_isik_isik_id PRIMARY KEY (isik_id),
 CONSTRAINT uc_isik_riik_kood_isikukood UNIQUE (riik_kood,isikukood),
 CONSTRAINT uc_isik_e_meil UNIQUE (e_meil),
