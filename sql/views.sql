@@ -24,7 +24,7 @@ FROM laud l, isik i, laua_seisundi_liik lsl, laua_materjal lm, laua_asukoht la
 WHERE (l.registreerija_id = i.isik_id) AND lsl.laua_seisundi_liik_kood = l.laua_seisundi_liik_kood AND l.laua_materjali_kood = lm.laua_materjali_kood AND l.laua_asukoht_kood = la.laua_asukoht_kood;
 COMMENT ON VIEW laud_detailid IS 'Vaade leiab andmed kõikide laudade ja nende detailide kohta. Detailides sisaldub registreerimise aeg, registreerija, registreerija e-mail, laua asukoht, kohtade arv, laua seisund, kommentaar, laua materjal ning laua kategooria(d).';
 
-CREATE OR REPLACE VIEW laud_kategooria WITH (security_barrier) AS SELECT l.laua_kood, (COALESCE(lk.nimetus,'') || ' (' || COALESCE(lkt.nimetus,'') || ')') AS kategooria
+CREATE OR REPLACE VIEW laud_kategooria WITH (security_barrier) AS SELECT l.laua_kood, lk.nimetus || ' (' || lkt.nimetus || ')' AS kategooria
 FROM laud l, laua_kategooria lk, laua_kategooria_omamine lko, laua_kategooria_tyyp lkt
 WHERE l.laua_kood = lko.laua_kood
 AND lk.laua_kategooria_kood = lko.laua_kategooria_kood
