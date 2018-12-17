@@ -115,7 +115,7 @@ RAISE EXCEPTION 'Laua muutmine ebakorrektses seisundis!';
 END IF;
 END; 
 $f_laua_seisundi_kontroll$ LANGUAGE plpgsql;
-COMMENT ON FUNCTION f_kontrolli_laua_seisundit IS 'Funktsioon kontrollib, et laud oleks seisundis ootel või mitteaktiivne.';
+COMMENT ON FUNCTION f_laua_seisundi_kontroll IS 'Funktsioon kontrollib, et laud oleks seisundis ootel või mitteaktiivne.';
 
 CREATE TRIGGER t_laua_seisundi_kontroll BEFORE UPDATE ON laud
 FOR EACH ROW EXECUTE PROCEDURE f_laua_seisundi_kontroll();
