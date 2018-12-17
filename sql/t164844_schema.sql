@@ -98,7 +98,7 @@ nimetus d_nimetus,
 kirjeldus TEXT NULL,
 CONSTRAINT pk_amet_amet_kood PRIMARY KEY (amet_kood),
 CONSTRAINT uc_amet_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_amet_kirjeldus CHECK (trim(kirjeldus) <> '' AND char_length(kirjeldus) <= 4000),
+CONSTRAINT chk_amet_kirjeldus CHECK (trim(kirjeldus) <> '' AND char_length(kirjeldus) <= 4000)
 ) WITH (fillfactor=90)
 ;
 
@@ -251,7 +251,7 @@ registreerija_id INTEGER NOT NULL,
 reg_aeg d_reg_aeg,
 kohtade_arv SMALLINT NOT NULL,
 laua_kategooria_tyyp_kood SMALLINT NOT NULL,
-kommentaar TEXT	NULL,
+kommentaar TEXT NULL,
 CONSTRAINT pk_laud_laua_kood PRIMARY KEY (laua_kood),
 CONSTRAINT chk_laud_kommentaar CHECK (char_length(kommentaar) <= 4000),
 CONSTRAINT chk_laud_kohtade_arv CHECK (kohtade_arv > 0 AND kohtade_arv < 17),

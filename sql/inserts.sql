@@ -61,9 +61,6 @@ INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, perenimi, elukoht) VALUES
 ('student2831@example.com', '39948815', 'examplepass', 'EST', 1, '1999-01-01', '2018-05-25 15:43:11', 'Mass', 'Võru Tamme tn 6');
 
-INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, elukoht) VALUES
-('test1234@gmail.com', '394032198', 'parool', 'EST', 1, '1990-01-01', '2018-04-29 19:42:27', 'Rapla Võsa tn 6');
-
 CREATE FOREIGN TABLE isik_jsonb ( isik JSONB ) SERVER minu_testandmete_server_apex;
 
 INSERT INTO isik (riik_kood, isikukood, eesnimi, perenimi, e_meil, synni_kp, isiku_seisundi_liik_kood, parool, elukoht)
