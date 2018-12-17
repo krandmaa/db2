@@ -1,6 +1,6 @@
 /* Drop triggers and functions */
 
-DROP TRIGGER IF EXISTS t_laua_seisundi_kontroll ON laud;
+DROP TRIGGER IF EXISTS t_laud_seisundi_kontroll ON laud;
 
 DROP TRIGGER IF EXISTS t_unusta_laud_kontroll ON laud;
 
@@ -26,7 +26,7 @@ DROP FUNCTION IF EXISTS f_muuda_laud_aktiivseks(p_laua_kood SMALLINT);
 
 DROP FUNCTION IF EXISTS f_muuda_laud_mitteaktiivseks(p_laua_kood SMALLINT);
 
-DROP FUNCTION IF EXISTS f_laua_seisundi_kontroll();
+DROP FUNCTION IF EXISTS f_laud_seisundi_kontroll();
 
 DROP FUNCTION IF EXISTS f_unusta_laud_kontroll();
 
@@ -108,18 +108,18 @@ COMMENT ON FUNCTION f_muuda_laud_mitteaktiivseks IS 'OP4 Muuda laud mitteaktiivs
 
 /* Create triggers */
 
-CREATE OR REPLACE FUNCTION f_laua_seisundi_kontroll() RETURNS TRIGGER AS $f_laua_seisundi_kontroll$ 
+CREATE OR REPLACE FUNCTION f_laud_seisundi_kontroll() RETURNS TRIGGER AS $f_laud_seisundi_kontroll$ 
 BEGIN 
 IF NOT(OLD.laua_seisundi_liik_kood = 1 OR OLD.laua_seisundi_liik_kood = 3) THEN 
 RAISE EXCEPTION 'Laua muutmine ebakorrektses seisundis!'; 
 END IF;
 END; 
-$f_laua_seisundi_kontroll$ LANGUAGE plpgsql;
-COMMENT ON FUNCTION f_laua_seisundi_kontroll IS 'Funktsioon kontrollib, et laud oleks seisundis ootel või mitteaktiivne.';
+$f_laud_seisundi_kontroll$ LANGUAGE plpgsql;
+COMMENT ON FUNCTION f_laud_seisundi_kontroll IS 'Funktsioon kontrollib, et laud oleks seisundis ootel või mitteaktiivne.';
 
-CREATE TRIGGER t_laua_seisundi_kontroll BEFORE UPDATE ON laud
-FOR EACH ROW EXECUTE PROCEDURE f_laua_seisundi_kontroll();
-COMMENT ON TRIGGER t_laua_seisundi_kontroll ON laud IS 'Kontrollib, et laua andmeid ei saaks muuta, kui see on aktiivses või lõpetatud seisundis.';
+CREATE TRIGGER t_laud_seisundi_kontroll BEFORE UPDATE ON laud
+FOR EACH ROW EXECUTE PROCEDURE f_laud_seisundi_kontroll();
+COMMENT ON TRIGGER t_laud_seisundi_kontroll ON laud IS 'Kontrollib, et laua andmeid ei saaks muuta, kui see on aktiivses või lõpetatud seisundis.';
 
 
 CREATE OR REPLACE FUNCTION f_unusta_laud_kontroll() RETURNS TRIGGER AS $f_unusta_laud_kontroll$
