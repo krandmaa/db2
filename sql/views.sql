@@ -5,6 +5,7 @@ DROP VIEW IF EXISTS laud_koik_seisundid;
 DROP VIEW IF EXISTS laud_detailid;
 DROP VIEW IF EXISTS laud_kategooria;
 DROP VIEW IF EXISTS laud_koondaruanne;
+DROP VIEW IF EXISTS laud_kategooria_omamine;
 
 /* CREATE VIEW */
 
@@ -38,6 +39,14 @@ GROUP BY lsl.laua_seisundi_liik_kood, lsl.nimetus
 ORDER BY COUNT(l.laua_kood) DESC;
 COMMENT ON VIEW laud_koondaruanne IS 'Vaade leiab koondtulemused kõikide laudade seisunditest. Vaates näidatakse ka laudade arvu, mis vastavasse seisundisse kuulub. Tulemus on sorteeritud laudade arvu järgi kahanevalt.';
 
+CREATE OR REPLACE VIEW laud_kategooria_omamine WITH (security_barrier) AS
+SELECT l.laua_kood, lk.nimetus || ' (' || lkt.nimetus || ')' AS kategooria
+FROM laud l, laua_kategooria lk, laua_kategooria_omamine lko, laua_kategooria_tyyp lkt
+WHERE l.laua_kood = lko.laua_kood AND lk.laua_kategooria_kood = lko.laua_kategooria_kood AND lkt.laua_kategooria_tyyp_kood = lk.laua_kategooria_tyyp_kood
+ORDER BY l.laua_kood;
+COMMENT ON VIEW laud_kategooria_omamine IS 'Vaade kuvab laua koodi ja laua kategooria koos laua kategooria tüübiga, millesse see kuulub.';
+
+
 /* SELECT VIEW */
 
 SELECT * FROM laud_aktiivne_mitteaktiivne;
@@ -45,4 +54,5 @@ SELECT * FROM laud_koik_seisundid;
 SELECT * FROM laud_detailid;
 SELECT * FROM laud_kategooria;
 SELECT * FROM laud_koondaruanne;
+SELECT * FROM laud_kategooria_omamine;
 
