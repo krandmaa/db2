@@ -173,7 +173,7 @@ riik_kood VARCHAR(3) NOT NULL,
 nimetus d_nimetus,
 CONSTRAINT pk_riik_riik_kood PRIMARY KEY (riik_kood),
 CONSTRAINT uc_riik_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_riik_riik_kood CHECK (trim(riik_kood) <> '' AND (riik_kood ~ '^[A-Z]{3}$'))
+CONSTRAINT chk_riik_riik_kood CHECK (riik_kood ~ '^[A-Z]{3}$')
 )
 ;
 
@@ -198,7 +198,7 @@ reg_aeg d_reg_aeg,
 synni_kp date NOT NULL,
 eesnimi VARCHAR(1000) NULL,
 perenimi VARCHAR(1000) NULL,
-elukoht VARCHAR(255) NULL,
+elukoht VARCHAR(1000) NULL,
 CONSTRAINT pk_isik_isik_id PRIMARY KEY (isik_id),
 CONSTRAINT uc_isik_riik_kood_isikukood UNIQUE (riik_kood,isikukood),
 CONSTRAINT uc_isik_e_meil UNIQUE (e_meil),
