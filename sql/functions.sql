@@ -52,8 +52,8 @@ p_laua_materjali_kood laud.laua_materjali_kood % TYPE,
 p_registreerija_id laud.registreerija_id % TYPE)
 RETURNS SMALLINT AS $$
 INSERT INTO laud
-(laua_kood, kohtade_arv, reg_aeg, kommentaar, laua_asukoht_kood, laua_materjali_kood, registreerija_id) VALUES
-(p_laua_kood, p_kohtade_arv, current_timestamp(0), p_kommentaar, p_laua_asukoht_kood, p_laua_materjali_kood, p_registreerija_id)
+(laua_kood, kohtade_arv, kommentaar, laua_asukoht_kood, laua_materjali_kood, registreerija_id) VALUES
+(p_laua_kood, p_kohtade_arv, p_kommentaar, p_laua_asukoht_kood, p_laua_materjali_kood, p_registreerija_id)
 ON CONFLICT DO NOTHING
 RETURNING laua_kood;
 $$ LANGUAGE SQL SECURITY DEFINER
