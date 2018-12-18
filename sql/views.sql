@@ -14,6 +14,13 @@ FROM laud l, laua_asukoht la, laua_seisundi_liik lsl
 WHERE lsl.laua_seisundi_liik_kood = l.laua_seisundi_liik_kood AND l.laua_asukoht_kood = la.laua_asukoht_kood AND l.laua_seisundi_liik_kood IN (2,3);
 COMMENT ON VIEW laud_aktiivne_mitteaktiivne IS 'Vaade leiab andmed aktiivsetest ja mitteaktiivsetest laudadest. Vaates näidatakse ka laua asukohta, mis annab töötajale ülevaate sellest, kus aktiivsed ja mitteaktiivsed lauad asuvad.';
 
+CREATE OR REPLACE VIEW laud_ootel_mitteaktiivne WITH (security_barrier) AS 
+SELECT l.laua_kood, la.nimetus AS asukoht, lsl.nimetus AS laua_seisund
+FROM laud l, laua_asukoht la, laua_seisundi_liik lsl
+WHERE lsl.laua_seisundi_liik_kood = l.laua_seisundi_liik_kood AND l.laua_asukoht_kood = la.laua_asukoht_kood AND l.laua_seisundi_liik_kood IN (1,3);
+COMMENT ON VIEW laud_aktiivne_mitteaktiivne IS 'Vaade leiab andmed ootel ja mitteaktiivsetest laudadest. Vaates näidatakse ka laua asukohta, mis annab töötajale ülevaate sellest, kus ootel ja mitteaktiivsed lauad asuvad.';
+
+
 CREATE OR REPLACE VIEW laud_koik_seisundid WITH (security_barrier) AS SELECT l.laua_kood, la.nimetus AS asukoha_kirjeldus, lsl.nimetus AS laua_seisund
 FROM laud l, laua_seisundi_liik lsl, laua_asukoht la
 WHERE lsl.laua_seisundi_liik_kood = l.laua_seisundi_liik_kood AND l.laua_asukoht_kood = la.laua_asukoht_kood;
