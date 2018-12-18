@@ -38,6 +38,7 @@ GROUP BY lsl.laua_seisundi_liik_kood, lsl.nimetus
 ORDER BY COUNT(l.laua_kood) DESC;
 COMMENT ON VIEW laud_koondaruanne IS 'Vaade leiab koondtulemused kõikide laudade seisunditest. Vaates näidatakse ka laudade arvu, mis vastavasse seisundisse kuulub. Tulemus on sorteeritud laudade arvu järgi kahanevalt.';
 
+
 /* SELECT VIEW */
 
 SELECT * FROM laud_aktiivne_mitteaktiivne;
