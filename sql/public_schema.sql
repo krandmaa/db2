@@ -202,7 +202,9 @@ elukoht VARCHAR(1000) NULL,
 CONSTRAINT pk_isik_isik_id PRIMARY KEY (isik_id),
 CONSTRAINT uc_isik_riik_kood_isikukood UNIQUE (riik_kood,isikukood),
 CONSTRAINT uc_isik_e_meil UNIQUE (e_meil),
-CONSTRAINT chk_isik_eesnimi_perenimi CHECK ((trim(eesnimi) <> '' AND eesnimi IS NOT NULL) OR (trim(perenimi) <> '' AND perenimi IS NOT NULL)),
+CONSTRAINT chck_isik_eesnimi CHECK (trim(eesnimi) <> ''),
+CONSTRAINT chck_isik_perenimi CHECK (trim(perenimi) <> ''),
+CONSTRAINT chk_isik_eesnimi_perenimi CHECK (eesnimi IS NOT NULL OR perenimi IS NOT NULL),
 CONSTRAINT chk_isik_e_meil CHECK (e_meil LIKE '%@%' AND 
 e_meil NOT LIKE '%@%@%'),
 CONSTRAINT chk_isik_isikukood CHECK (trim(isikukood) <> '' AND
@@ -210,7 +212,7 @@ isikukood ~* '^[a-z0-9 -\/]+$'),
 CONSTRAINT chk_isik_parool CHECK (trim(parool) <> ''),
 CONSTRAINT chk_isik_synni_kp_reg_aeg CHECK (synni_kp <= reg_aeg),
 CONSTRAINT chk_isik_synni_kp CHECK (synni_kp >= '1900-01-01 00:00:00'::timestamp without time zone AND synni_kp <= '2100-12-31 23:59:59'::timestamp without time zone),
-CONSTRAINT chk_isik_elukoht CHECK (NOT(REPLACE(elukoht, ' ', '') ~ '^[0-9\.]+$')),
+CONSTRAINT chk_isik_elukoht CHECK (trim(elukoht) <> ''),
 CONSTRAINT fk_isik_isiku_seisundi_liik_kood FOREIGN KEY (isiku_seisundi_liik_kood) REFERENCES isiku_seisundi_liik (isiku_seisundi_liik_kood) ON DELETE NO ACTION ON UPDATE CASCADE,
 CONSTRAINT fk_isik_riik_kood FOREIGN KEY (riik_kood) REFERENCES Riik (riik_kood) ON DELETE NO ACTION ON UPDATE CASCADE
 ) WITH (fillfactor=90)
