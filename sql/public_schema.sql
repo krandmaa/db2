@@ -201,9 +201,8 @@ perenimi VARCHAR(1000) NULL,
 elukoht VARCHAR(1000) NULL,
 CONSTRAINT pk_isik_isik_id PRIMARY KEY (isik_id),
 CONSTRAINT uc_isik_riik_kood_isikukood UNIQUE (riik_kood,isikukood),
-CONSTRAINT uc_isik_e_meil UNIQUE (e_meil),
-CONSTRAINT chck_isik_eesnimi CHECK (trim(eesnimi) <> ''),
-CONSTRAINT chck_isik_perenimi CHECK (trim(perenimi) <> ''),
+CONSTRAINT chk_isik_eesnimi CHECK (trim(eesnimi) <> ''),
+CONSTRAINT chk_isik_perenimi CHECK (trim(perenimi) <> ''),
 CONSTRAINT chk_isik_eesnimi_perenimi CHECK (eesnimi IS NOT NULL OR perenimi IS NOT NULL),
 CONSTRAINT chk_isik_e_meil CHECK (e_meil LIKE '%@%' AND 
 e_meil NOT LIKE '%@%@%'),
@@ -309,4 +308,7 @@ CREATE INDEX ixfk_laud_laua_materjali_kood ON laud (laua_materjali_kood ASC)
 ;
 
 CREATE INDEX ixfk_tootaja_amet_kood ON tootaja (amet_kood ASC)
+;
+
+CREATE UNIQUE INDEX ixfk_isik_e_meil ON isik (UPPER(e_meil))
 ;
