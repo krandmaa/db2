@@ -15,7 +15,9 @@ p_kohtade_arv SMALLINT,
 p_kommentaar TEXT,
 p_laua_asukoht_kood SMALLINT,
 p_laua_materjali_kood SMALLINT,
-p_registreerija_id INTEGER);
+p_registreerija_id INTEGER,
+p_laua_kategooria_tyyp_kood SMALLINT,
+p_laua_seisundi_liik_kood SMALLINT);
 
 DROP FUNCTION IF EXISTS f_unusta_laud(p_laua_kood SMALLINT);
 
@@ -49,11 +51,13 @@ p_kohtade_arv laud.kohtade_arv % TYPE,
 p_kommentaar laud.kommentaar % TYPE,
 p_laua_asukoht_kood laud.laua_asukoht_kood % TYPE,
 p_laua_materjali_kood laud.laua_materjali_kood % TYPE,
-p_registreerija_id laud.registreerija_id % TYPE)
+p_registreerija_id laud.registreerija_id % TYPE,
+p_laua_kategooria_tyyp_kood laud.laua_kategooria_tyyp_kood % TYPE,
+p_laua_seisundi_liik_kood laud.laua_seisundi_liik_kood % TYPE)
 RETURNS SMALLINT AS $$
 INSERT INTO laud
-(laua_kood, kohtade_arv, kommentaar, laua_asukoht_kood, laua_materjali_kood, registreerija_id) VALUES
-(p_laua_kood, p_kohtade_arv, p_kommentaar, p_laua_asukoht_kood, p_laua_materjali_kood, p_registreerija_id)
+(laua_kood, kohtade_arv, kommentaar, laua_asukoht_kood, laua_materjali_kood, registreerija_id, laua_kategooria_tyyp_kood, laua_seisundi_liik_kood) VALUES
+(p_laua_kood, p_kohtade_arv, p_kommentaar, p_laua_asukoht_kood, p_laua_materjali_kood, p_registreerija_id, p_laua_kategooria_tyyp_kood, p_laua_seisundi_liik_kood)
 ON CONFLICT DO NOTHING
 RETURNING laua_kood;
 $$ LANGUAGE SQL SECURITY DEFINER
@@ -90,8 +94,7 @@ COMMENT ON FUNCTION f_muuda_laud IS 'OP6 Muuda laua andmeid. Funktsiooniga uuend
 CREATE OR REPLACE FUNCTION f_muuda_laud_aktiivseks(p_laua_kood laud.laua_kood % TYPE)
 RETURNS VOID AS $$
 UPDATE laud SET laua_seisundi_liik_kood = 2
-WHERE laua_kood = p_laua_kood AND
-(laua_seisundi_liik_kood = 1 OR laua_seisundi_liik_kood = 3);
+WHERE laua_kood = p_laua_kood;
 $$ LANGUAGE SQL SECURITY DEFINER
 SET search_path = public, pg_temp;
 COMMENT ON FUNCTION f_muuda_laud_aktiivseks IS 'OP3 Aktiveeri laud. Funktsioon muudab andmebaasis laua mitteaktiivsest või ootel olekust aktiivsesse olekusse.';
@@ -99,8 +102,7 @@ COMMENT ON FUNCTION f_muuda_laud_aktiivseks IS 'OP3 Aktiveeri laud. Funktsioon m
 CREATE OR REPLACE FUNCTION f_muuda_laud_mitteaktiivseks(p_laua_kood laud.laua_kood % TYPE)
 RETURNS VOID AS $$
 UPDATE laud SET laua_seisundi_liik_kood = 3
-WHERE laua_kood = p_laua_kood AND
-laua_seisundi_liik_kood = 2;
+WHERE laua_kood = p_laua_kood;
 $$ LANGUAGE SQL SECURITY DEFINER
 SET search_path = public, pg_temp;
 COMMENT ON FUNCTION f_muuda_laud_mitteaktiivseks IS 'OP4 Muuda laud mitteaktiivseks lauaks. Funktsioon muudab andmebaasis laua aktiivsest olekust mitteaktiivsesse olekusse.';
