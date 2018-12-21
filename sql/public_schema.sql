@@ -104,7 +104,8 @@ nimetus d_nimetus,
 kirjeldus TEXT NULL,
 CONSTRAINT pk_amet_amet_kood PRIMARY KEY (amet_kood),
 CONSTRAINT uc_amet_nimetus UNIQUE (nimetus),
-CONSTRAINT chk_amet_kirjeldus CHECK (trim(kirjeldus) <> '' AND char_length(kirjeldus) <= 4000)
+CONSTRAINT chk_amet_kirjeldus CHECK (trim(kirjeldus) <> ''),
+CONSTRAINT chk_amet_kirjeldus_pikkus CHECK (char_length(kirjeldus) <= 4000)
 ) WITH (fillfactor=90)
 ;
 
