@@ -15,6 +15,7 @@ INSERT INTO laua_asukoht (laua_asukoht_kood, nimetus) VALUES (3, 'Akna all');
 INSERT INTO laua_asukoht (laua_asukoht_kood, nimetus) VALUES (4, 'Köögiukse juures');
 
 CREATE EXTENSION IF NOT EXISTS postgres_fdw;
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 
 CREATE SERVER minu_testandmete_server_apex FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'apex.ttu.ee', dbname 'testandmed', port '5432');
 
@@ -50,23 +51,30 @@ INSERT INTO laua_materjal (laua_materjali_kood, nimetus) VALUES (3, 'Raud');
 INSERT INTO laua_materjal (laua_materjali_kood, nimetus) VALUES (4, 'Paber');
 
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht) VALUES
-('test@gmail.com', '397032198', 'parool', 'EST', 1, '1990-01-01', '2018-04-29 19:42:27', 'Mart', 'Mets', 'Rapla Võsa tn 6');
+('test@gmail.com', '397032198', public.crypt('parool', public.gen_salt('bf', 11)), 'EST', 1, '1990-01-01', '2018-04-29 19:42:27', 'Mart', 'Mets', 'Rapla Võsa tn 6');
 
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, perenimi, elukoht) VALUES
-('hello@gmail.com', '397032148', 'password', 'EST', 1, '1990-02-01', '2018-04-30 19:47:31', 'Mihkel', 'Hass', 'Rapla');
+('hello@gmail.com', '397032148', public.crypt('password', public.gen_salt('bf', 11)), 'EST', 1, '1990-02-01', '2018-04-30 19:47:31', 'Mihkel', 'Hass', 'Rapla');
 
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, eesnimi, elukoht) VALUES
-('student@example.com', '39948515', 'examplepass', 'EST', 1, '1999-01-01', '2018-05-25 15:43:11', 'Mati', 'Võru Tamme tn 6');
+('student@example.com', '39948515', public.crypt('examplepass', public.gen_salt('bf', 11)), 'EST', 1, '1999-01-01', '2018-05-25 15:43:11', 'Mati', 'Võru Tamme tn 6');
 
 INSERT INTO isik (e_meil, isikukood, parool, riik_kood, isiku_seisundi_liik_kood, synni_kp, reg_aeg, perenimi, elukoht) VALUES
-('student2831@example.com', '39948815', 'examplepass', 'EST', 1, '1999-01-01', '2018-05-25 15:43:11', 'Mass', 'Võru Tamme tn 6');
+('student2831@example.com', '39948815', public.crypt('examplepass', public.gen_salt('bf', 11)), 'EST', 1, '1999-01-01', '2018-05-25 15:43:11', 'Mass', 'Võru Tamme tn 6');
 
 CREATE FOREIGN TABLE isik_jsonb ( isik JSONB ) SERVER minu_testandmete_server_apex;
 
 INSERT INTO isik (riik_kood, isikukood, eesnimi, perenimi, e_meil, synni_kp, isiku_seisundi_liik_kood, parool, elukoht)
 (SELECT riik_kood, isikukood, eesnimi, perenimi, e_mail, synni_kp::date, isiku_seisundi_liik_kood::smallint, parool, elukoht FROM
 (SELECT isik->>'riik' AS riik_kood,
-jsonb_array_elements(isik->'isikud')->>'isikukood' AS isikukood, jsonb_array_elements(isik->'isikud')->>'eesnimi' AS eesnimi, jsonb_array_elements(isik->'isikud')->>'perekonnanimi' AS perenimi, jsonb_array_elements(isik->'isikud')->>'email' AS e_mail, jsonb_array_elements(isik->'isikud')->>'synni_aeg' AS synni_kp, jsonb_array_elements(isik->'isikud')->>'seisund' AS isiku_seisundi_liik_kood, jsonb_array_elements(isik->'isikud')->>'parool' AS parool, jsonb_array_elements(isik->'isikud')->>'aadress' AS elukoht
+jsonb_array_elements(isik->'isikud')->>'isikukood' AS isikukood, 
+jsonb_array_elements(isik->'isikud')->>'eesnimi' AS eesnimi, 
+jsonb_array_elements(isik->'isikud')->>'perekonnanimi' AS perenimi, 
+jsonb_array_elements(isik->'isikud')->>'email' AS e_mail, 
+jsonb_array_elements(isik->'isikud')->>'synni_aeg' AS synni_kp, 
+jsonb_array_elements(isik->'isikud')->>'seisund' AS isiku_seisundi_liik_kood, 
+public.crypt(jsonb_array_elements(isik->'isikud')->>'parool', public.gen_salt('bf', 11)) AS parool, 
+jsonb_array_elements(isik->'isikud')->>'aadress' AS elukoht
 FROM isik_jsonb)
 AS lahteandmed WHERE isiku_seisundi_liik_kood::smallint=1);
 
