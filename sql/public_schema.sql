@@ -77,6 +77,9 @@ DROP SERVER IF EXISTS minu_testandmete_server_apex CASCADE
 DROP EXTENSION IF EXISTS postgres_fdw CASCADE
 ;
 
+DROP EXTENSION IF EXISTS pgcrypto CASCADE
+;
+
 /* Drop Domains */
 
 DROP DOMAIN IF EXISTS d_nimetus
