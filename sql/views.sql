@@ -42,7 +42,7 @@ COMMENT ON VIEW laud_kategooria IS 'Vaade leiab andmed laudadest, mis kuuluvad m
 CREATE OR REPLACE VIEW laud_koondaruanne WITH (security_barrier) AS SELECT lsl.laua_seisundi_liik_kood, UPPER(lsl.nimetus) AS seisund, COUNT(l.laua_kood) AS laudade_arv
 FROM laud l RIGHT JOIN laua_seisundi_liik lsl ON l.laua_seisundi_liik_kood = lsl.laua_seisundi_liik_kood
 GROUP BY lsl.laua_seisundi_liik_kood, lsl.nimetus
-ORDER BY COUNT(l.laua_kood) DESC;
+ORDER BY COUNT(lsl.laua_seisundi_liik_kood) DESC, laudade_arv;
 COMMENT ON VIEW laud_koondaruanne IS 'Vaade leiab koondtulemused kõikide laudade seisunditest. Vaates näidatakse ka laudade arvu, mis vastavasse seisundisse kuulub. Tulemus on sorteeritud laudade arvu järgi kahanevalt.';
 
 
